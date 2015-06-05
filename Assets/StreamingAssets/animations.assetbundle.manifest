@@ -1,0 +1,22 @@
+ManifestFileVersion: 0
+CRC: 1596397984
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: ef62367c791fdc7d6a3c81cb1fc05762
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 28563238e1fdec8875194c4c48718a27
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8313ef960913daa4c87de70a9090b40f, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+Assets:
+- Assets/AnimatorController/OFAnimatorController.controller
+Dependencies: []

@@ -1,0 +1,15 @@
+ManifestFileVersion: 0
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: units.assetbundle
+      Dependencies: {}
+    Info_1:
+      Name: animations.assetbundle
+      Dependencies: {}
+    Info_2:
+      Name: effects.assetbundle
+      Dependencies: {}
+    Info_3:
+      Name: atlas.assetbundle
+      Dependencies: {}

@@ -1,0 +1,17 @@
+import "Assets.Scripts.Core.Lua"
+import "Assets.Scripts.Core.Game"
+
+function onTest(e, a)
+	table.foreach(e, function(i, v) print (i, v) end)
+	print(a)
+end
+
+function main()
+	local view = OFGameObjectView.Create()
+	view.name = "123"
+	print(view.name)
+	--OFGame.On(Assets.Scripts.Core.Event.OFEventType.SkillStartCast, onTest)
+	--local unit = OFLuaScene.CreateUnit()
+	--OFGame.LocalPlayer:AddControlUnit(unit)
+	
+end

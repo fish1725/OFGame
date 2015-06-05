@@ -1,0 +1,34 @@
+ManifestFileVersion: 0
+CRC: 1306572747
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: dd4d2e416a815dbc4c3ebfb0e9511503
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 06c283a08921e6ede3ced8e3fe5b7327
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 275fc5543f4e43c48a8b9ce3c3b559e0, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
+  Script: {instanceID: 0}
+Assets:
+- Assets/Effects/CFX3_Fireball_A.prefab
+Dependencies: []

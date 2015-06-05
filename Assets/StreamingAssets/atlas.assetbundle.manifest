@@ -1,0 +1,29 @@
+ManifestFileVersion: 0
+CRC: 3115141223
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: fcca25b9480f00c9e28e80746440dd2e
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 75957c18d05791510cbdd301a328d69f
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Atlas/Textures/Miscellaneous/Scroll Bar/ScrollBar_Background.png
+- Assets/Atlas/Textures/Miscellaneous/Icons/Icon_Sword.png
+- Assets/Atlas/Textures/Miscellaneous/Icons/Icon_DeathKiss.png
+- Assets/Atlas/Textures/Miscellaneous/Icons/Icon_Fireball.png
+- Assets/Atlas/Textures/Miscellaneous/Scroll Bar/ScrollBar_Thumb_Normal.png
+- Assets/Atlas/Textures/Miscellaneous/Icons/Icon_Fireball2.png
+- Assets/Atlas/Textures/Miscellaneous/Icons/Icon_Arrows.png
+- Assets/Atlas/Textures/Miscellaneous/Scroll Bar/ScrollBar_Thumb_Hovered.png
+- Assets/Atlas/Textures/Miscellaneous/Icons/Icon_Shield.png
+- Assets/Atlas/Textures/Miscellaneous/Icons/Icon_Leafs.png
+- Assets/Atlas/Textures/Miscellaneous/Icons/Icon_BlindingLight.png
+- Assets/Atlas/Textures/Miscellaneous/Icons/Icon_Book.png
+Dependencies: []
