@@ -7,7 +7,7 @@ using UnityEngine.UI;
 #endregion
 
 namespace Assets.Scripts.Core.UI {
-    public class OFUIText : OFUIComponent, IOFUIProperty {
+    public class OFUIText : OFUIComponent {
         #region Fields
 
         private Text _text;

@@ -3,8 +3,7 @@
 using System;
 using System.Collections.Generic;
 using Assets.Scripts.Core.Event;
-using Assets.Scripts.Core.UI;
-using Assets.Scripts.Core.UI.List;
+using UnityEngine;
 
 #endregion
 
@@ -21,17 +20,15 @@ namespace Assets.Scripts.Core.VO {
 
         #region Properties
 
-        [OFUIProperty("animName", typeof (OFUIText))]
         public string animName { get; set; }
 
         public float cooldownTime { get; set; }
-        public Guid id { get; set; }
 
-        [OFUIProperty("name", typeof (OFUIText))]
+        public Guid id { get; private set; }
+
         public string name { get; set; }
 
-        [OFUIProperty("spriteName", typeof (OFUIImage))]
-        public string spriteName { get; set; }
+        public Sprite spriteName { get; set; }
 
         public List<IOFTrigger> triggers { get; set; }
 

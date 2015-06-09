@@ -8,7 +8,7 @@ using UnityEngine.UI;
 #endregion
 
 namespace Assets.Scripts.Core.UI {
-    public class OFUIImage : OFUIComponent, IOFUIProperty {
+    public class OFUIImage : OFUIComponent {
         #region Fields
 
         private Image _image;

@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -78,17 +79,68 @@ namespace Assets.Scripts.Core.UI.List {
             color.a = 0.8f;
             colorBlock.pressedColor = color;
             _button.colors = colorBlock;
+            _button.onClick.AddListener(OnClick);
+            ;
         }
 
-        public OFUIListItemCell AddCell(string propertyName, Func<object, string, object> getValue, Action<object, string, object> setValue) {
+        public OFUIListItemCell AddCell(string propertyName, Func<object, string, object> getValue,
+            Action<object, string, object> setValue, Func<object, string, bool> canWrite) {
             GameObject go = OFUIManager.CreateUIObject(propertyName, gameObject);
             OFUIListItemCell cell = go.AddComponent<OFUIListItemCell>();
             cell.getValue = getValue;
             cell.setValue = setValue;
+            cell.canWrite = canWrite;
             cell.model = model;
             cell.propertyName = propertyName;
             cells.Add(cell);
             return cell;
+        }
+
+        private void OnClick() {
+            if (model != null) {
+                if (model is PropertyInfo) {
+                } else {
+                    OFUIList list = OFUIManager.Instance.CreateList("List");
+                    foreach (PropertyInfo property in model.GetType().GetProperties()) {
+                        list.AddItem(property);
+                    }
+                    list.AddProperty("name", (o, s) => {
+                        PropertyInfo propertyInfo = o as PropertyInfo;
+                        if (propertyInfo != null) {
+                            return propertyInfo.Name;
+                        }
+                        return s;
+                    }, null, null);
+                    list.AddProperty("value", (o, s) => {
+                        PropertyInfo propertyInfo = o as PropertyInfo;
+                        if (propertyInfo != null) {
+                            return propertyInfo.GetValue(model, null);
+                        }
+                        return s;
+                    }, (o, s, arg3) => {
+                        PropertyInfo propertyInfo = o as PropertyInfo;
+                        if (propertyInfo != null) {
+                            propertyInfo.SetValue(model, arg3, null);
+                        }
+                    }, (o, s) => {
+                        PropertyInfo propertyInfo = o as PropertyInfo;
+                        if (propertyInfo != null) {
+                            return propertyInfo.GetSetMethod() != null;
+                        }
+                        return false;
+                    });
+                    list.rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
+                    list.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+                    list.rectTransform.offsetMin = Vector2.zero;
+                    list.rectTransform.offsetMax = Vector2.zero;
+                    list.width = 300;
+                    list.height = 500;
+                }
+            }
+        }
+
+        public void Save() {
+            
         }
 
         #endregion

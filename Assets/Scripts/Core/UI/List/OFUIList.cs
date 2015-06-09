@@ -24,10 +24,10 @@ namespace Assets.Scripts.Core.UI.List {
         private LayoutGroup _layout2;
         private GameObject _main;
         private ScrollRect _scrollRect;
+        private LayoutElement _scrollRectLayoutElement;
         private float _scrollbarWidth = 15f;
         private LayoutElement _verticaLayoutElement;
         private OFUIScrollBar _verticalScrollbar;
-        private LayoutElement _scrollRectLayoutElement;
 
         #endregion
 
@@ -147,15 +147,16 @@ namespace Assets.Scripts.Core.UI.List {
             listItem.model = item;
             listItem.direction = _direction;
             foreach (OFUIListItemCell cell in _banner.cells) {
-                listItem.AddCell(cell.propertyName, cell.getValue, cell.setValue);
+                listItem.AddCell(cell.propertyName, cell.getValue, cell.setValue, cell.canWrite);
             }
             _items.Add(listItem);
         }
 
-        public void AddProperty(string propertyName, Func<object, string, object> getValue, Action<object, string, object> setValue) {
-            _banner.AddCell(propertyName, getValue, setValue);
+        public void AddProperty(string propertyName, Func<object, string, object> getValue,
+            Action<object, string, object> setValue, Func<object, string, bool> canWrite) {
+            _banner.AddCell(propertyName, getValue, setValue, canWrite);
             foreach (OFUIListItem item in _items) {
-                item.AddCell(propertyName, getValue, setValue);
+                item.AddCell(propertyName, getValue, setValue, canWrite);
             }
         }
 
@@ -281,7 +282,7 @@ namespace Assets.Scripts.Core.UI.List {
             Image bgImage = scrollRectGo.AddComponent<Image>();
             bgImage.sprite = OFUIManager.Instance.background;
             bgImage.type = Image.Type.Sliced;
-            bgImage.color = new Color(0,0,0,0);
+            bgImage.color = new Color(0, 0, 0, 0);
             gameObject.AddComponent<Mask>();
 
             bgImage = gameObject.AddComponent<Image>();
@@ -295,6 +296,10 @@ namespace Assets.Scripts.Core.UI.List {
             horizontalScrollbarVisible = false;
             scorllbarWidth = 15f;
             bannerWidth = 20f;
+        }
+
+        public void Save() {
+            
         }
 
         #endregion

@@ -10,6 +10,7 @@ using Assets.Scripts.Core.Loader;
 using Assets.Scripts.Core.UI;
 using Assets.Scripts.Core.UI.List;
 using Assets.Scripts.Core.Utils.Debug;
+using Assets.Scripts.Core.VO;
 using UnityEngine;
 
 #endregion
@@ -104,7 +105,6 @@ namespace Assets.Scripts.Core.Game {
                 Expression.Call(Expression.Constant(this), typeof (OFGame).GetMethod("Test2"));
             _action.Compile();
 
-            _scene.CreateSkillVO();
         }
 
 
@@ -125,13 +125,36 @@ namespace Assets.Scripts.Core.Game {
             //foreach (OFUnit unit in LocalPlayer.ControlUnits) {
             //    unit.StartSkill(unit.Skills.First().Value.id);
             //}
-            _list.AddItem(_scene.CreateSkillVO());
+            OFSkillVO skill = _scene.CreateSkillVO();
+            _list.AddItem(skill);
+            //foreach (PropertyInfo property in skill.GetType().GetProperties()) {
+            //    _list.AddItem(property);
+            //}
+            //_list.AddProperty("name", (o, s) => {
+            //    PropertyInfo propertyInfo = o as PropertyInfo;
+            //    if (propertyInfo != null) {
+            //        return propertyInfo.Name;
+            //    }
+            //    return s;
+            //}, null);
+            //_list.AddProperty("value", (o, s) => {
+            //    PropertyInfo propertyInfo = o as PropertyInfo;
+            //    if (propertyInfo != null) {
+            //        return propertyInfo.GetValue(skill, null);
+            //    }
+            //    return s;
+            //}, (o, s, arg3) => {
+            //    PropertyInfo propertyInfo = o as PropertyInfo;
+            //    if (propertyInfo != null) {
+            //        propertyInfo.SetValue(skill, arg3, null);
+            //    }
+            //});
         }
 
         public void Test3() {
             //LuaSvr svr = new LuaSvr();
             //svr.start("OFGame");
-            _list.AddProperty("spriteName", getValue, setValue);
+            _list.AddProperty("spriteName", getValue, setValue, null);
         }
 
         public void Update() {
@@ -152,7 +175,7 @@ namespace Assets.Scripts.Core.Game {
         private object getValue(object model, string propertyName) {
             if (model != null) {
                 PropertyInfo pi = model.GetType()
-                .GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
+                    .GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
                 if (pi != null) {
                     return pi.GetValue(model, null);
                 }

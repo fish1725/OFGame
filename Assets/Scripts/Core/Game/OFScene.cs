@@ -59,7 +59,7 @@ namespace Assets.Scripts.Core.Game {
                 name = "skill1",
                 animName = "Skill1",
                 cooldownTime = 5,
-                spriteName = "Icon_Fireball"
+                spriteName = OFAssetManager.Instance.Get("Icon_Fireball").Object as Sprite
             };
             OFTimelineTrigger timelineTrigger = new OFTimelineTrigger();
             timelineTrigger.normalizedTime = 0.5f;

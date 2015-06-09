@@ -10,8 +10,6 @@ namespace Assets.Scripts.Core.UI.List {
     public class OFUIListItemCell : OFUIComponent {
         #region Fields
 
-        public Func<object, string, object> getValue;
-        public Action<object, string, object> setValue;
         private Image _backgroundImage;
 
         private HorizontalLayoutGroup _layout;
@@ -29,6 +27,9 @@ namespace Assets.Scripts.Core.UI.List {
             get { return _backgroundImage.sprite; }
             set { _backgroundImage.sprite = value; }
         }
+
+        public Func<object, string, bool> canWrite { get; set; }
+        public Func<object, string, object> getValue { get; set; }
 
         public LayoutElement layoutElement {
             get { return _layoutElement; }
@@ -52,6 +53,8 @@ namespace Assets.Scripts.Core.UI.List {
                 Refresh();
             }
         }
+
+        public Action<object, string, object> setValue { get; set; }
 
         #endregion
 
@@ -81,7 +84,8 @@ namespace Assets.Scripts.Core.UI.List {
                 propertyValue = _propertyName;
             }
             Type baseType = typeof (OFUIListItemCellValue);
-            Type propertyType = Type.GetType(baseType.Name + propertyValue.GetType().Name);
+            Debug.Log("type: " + baseType.FullName + propertyValue.GetType().Name);
+            Type propertyType = Type.GetType(baseType.FullName + propertyValue.GetType().Name);
             if (propertyType == null) {
                 propertyType = baseType;
             }
@@ -91,7 +95,13 @@ namespace Assets.Scripts.Core.UI.List {
             }
             Debug.Assert(cellValue != null);
             if (cellValue != null) {
+                if (canWrite != null) {
+                    cellValue.canWrite = canWrite(model, _propertyName);
+                } else {
+                    cellValue.canWrite = false;
+                }
                 cellValue.propertyValue = propertyValue;
+                _layoutElement.preferredWidth = cellValue.preferredWidth;
             }
         }
 
