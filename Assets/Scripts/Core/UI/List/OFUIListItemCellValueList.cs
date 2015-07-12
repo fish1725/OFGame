@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.Core.UI.List
 {
-	public class OFUIListItemCellValueArrayList : OFUIListItemCellValue
+	public class OFUIListItemCellValueList : OFUIListItemCellValue
 	{
 		private OFUIList _list;
 		private HorizontalLayoutGroup _layout;
-		public OFUIListItemCellValueArrayList ()
+		public OFUIListItemCellValueList ()
 		{
 		}
 
@@ -28,6 +28,11 @@ namespace Assets.Scripts.Core.UI.List
 						return s;
 					}
 					return o;
+				}, null, null, (o, s) => {
+					if (o == null) {
+						return typeof(String);
+					}
+					return cellType.GetGenericArguments()[0];
 				});
 			}
 		}
@@ -46,6 +51,7 @@ namespace Assets.Scripts.Core.UI.List
 			_list.rectTransform.offsetMin = Vector2.zero;
 			_list.rectTransform.offsetMax = Vector2.zero;
 			_list.verticalScrollbarVisible = false;
+			_list.bannerWidth = 0;
 
 		}
 	}

@@ -12,6 +12,7 @@ using Assets.Scripts.Core.UI.List;
 using Assets.Scripts.Core.Utils.Debug;
 using Assets.Scripts.Core.VO;
 using UnityEngine;
+using Assets.Scripts.Core.UI.Window;
 
 #endregion
 
@@ -119,6 +120,8 @@ namespace Assets.Scripts.Core.Game {
             _list = OFUIManager.Instance.CreateList("List");
             _list.width = 300;
             _list.scorllbarWidth = 20;
+
+//			OFUIWindow window = OFUIManager.Instance.CreateWindow ("Window");
         }
 
         public void Test2() {

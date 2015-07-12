@@ -2,16 +2,20 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 #endregion
 
 namespace Assets.Scripts.Core.Event {
     public class OFTimelineTrigger : IOFTrigger {
         #region Fields
-
-        public List<OFAction> actions;
-        public List<OFCondition> conditions;
-        public float normalizedTime;
+		
+		[OFUIListItemCell(typeof(List<Expression>))]
+		public List<OFAction> actions{ get; set; }
+		[OFUIListItemCell(typeof(List<Expression>))]
+		public List<OFCondition> conditions{ get; set; }
+		[OFUIListItemCell(typeof(string))]
+		public float normalizedTime{ get; set; }
 
         #endregion
 

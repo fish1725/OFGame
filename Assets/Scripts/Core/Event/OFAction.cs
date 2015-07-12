@@ -6,10 +6,10 @@ using System.Linq.Expressions;
 #endregion
 
 namespace Assets.Scripts.Core.Event {
-    public class OFAction {
+    public class OFAction : IOFExpression {
         #region Fields
 
-        public Expression expression;
+		public Expression expression { get; set; }
         private Action _compiled;
 
         #endregion

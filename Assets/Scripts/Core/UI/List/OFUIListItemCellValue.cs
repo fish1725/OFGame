@@ -1,4 +1,6 @@
-﻿namespace Assets.Scripts.Core.UI.List {
+﻿using System;
+
+namespace Assets.Scripts.Core.UI.List {
     public class OFUIListItemCellValue : OFUIComponent {
         #region Fields
 
@@ -21,6 +23,7 @@
 
         public object model { get; set; }
         public string propertyName { get; set; }
+		public Type cellType { get; set; }
 
         #endregion
     }

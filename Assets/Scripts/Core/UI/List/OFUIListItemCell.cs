@@ -30,6 +30,7 @@ namespace Assets.Scripts.Core.UI.List {
 
         public Func<object, string, bool> canWrite { get; set; }
         public Func<object, string, object> getValue { get; set; }
+		public Func<object, string, Type> getType { get; set; }
 
         public LayoutElement layoutElement {
             get { return _layoutElement; }
@@ -84,8 +85,20 @@ namespace Assets.Scripts.Core.UI.List {
                 propertyValue = _propertyName;
             }
             Type baseType = typeof (OFUIListItemCellValue);
-            Debug.Log("type: " + baseType.FullName + propertyValue.GetType().Name);
-            Type propertyType = Type.GetType(baseType.FullName + propertyValue.GetType().Name);
+			Type cellType = null;
+			if (getType != null) {
+				cellType = getType(model, _propertyName);
+			}
+			if (cellType == null) {
+				cellType = propertyValue.GetType ();
+			}
+
+			int pos = cellType.Name.IndexOf ("`");
+
+			string cellTypeName = pos >= 0?cellType.Name.Substring (0,pos ):cellType.Name;
+
+			Type propertyType = Type.GetType(baseType.FullName + cellTypeName);
+			Debug.Log("type: " + baseType.FullName + cellTypeName + " \n" + propertyType);
             if (propertyType == null) {
                 propertyType = baseType;
             }
@@ -99,7 +112,8 @@ namespace Assets.Scripts.Core.UI.List {
                     cellValue.canWrite = canWrite(model, _propertyName);
                 } else {
                     cellValue.canWrite = false;
-                }
+				}
+				cellValue.cellType = cellType;
                 cellValue.propertyValue = propertyValue;
                 _layoutElement.preferredWidth = cellValue.preferredWidth;
             }

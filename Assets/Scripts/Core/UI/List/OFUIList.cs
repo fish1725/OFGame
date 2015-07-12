@@ -114,6 +114,13 @@ namespace Assets.Scripts.Core.UI.List {
             }
         }
 
+		public bool bannerVisible {
+			get { return _banner.gameObject.activeSelf;}
+			set {
+				_banner.gameObject.SetActive(value);
+			}
+		}
+
         #endregion
 
         #region Methods
@@ -147,16 +154,16 @@ namespace Assets.Scripts.Core.UI.List {
             listItem.model = item;
             listItem.direction = _direction;
             foreach (OFUIListItemCell cell in _banner.cells) {
-                listItem.AddCell(cell.propertyName, cell.getValue, cell.setValue, cell.canWrite);
+                listItem.AddCell(cell.propertyName, cell.getValue, cell.setValue, cell.canWrite, cell.getType);
             }
             _items.Add(listItem);
         }
 
         public void AddProperty(string propertyName, Func<object, string, object> getValue,
-            Action<object, string, object> setValue, Func<object, string, bool> canWrite) {
-            _banner.AddCell(propertyName, getValue, setValue, canWrite);
+		                        Action<object, string, object> setValue = null, Func<object, string, bool> canWrite = null, Func<object, string, Type> getType = null) {
+            _banner.AddCell(propertyName, getValue, setValue, canWrite, getType);
             foreach (OFUIListItem item in _items) {
-                item.AddCell(propertyName, getValue, setValue, canWrite);
+                item.AddCell(propertyName, getValue, setValue, canWrite, getType);
             }
         }
 
@@ -231,6 +238,7 @@ namespace Assets.Scripts.Core.UI.List {
             GameObject scrollRectGo = OFUIManager.CreateUIObject("ScrollRect", _main);
             _scrollRect = scrollRectGo.AddComponent<ScrollRect>();
             _scrollRectLayoutElement = _scrollRect.gameObject.AddComponent<LayoutElement>();
+			VerticalLayoutGroup scorllRectLayoutGroup = _scrollRect.gameObject.AddComponent<VerticalLayoutGroup> ();
             RectTransform rt = _scrollRect.gameObject.GetComponent<RectTransform>();
             rt.anchorMin = Vector2.zero;
             rt.anchorMax = Vector2.one;

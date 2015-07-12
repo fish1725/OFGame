@@ -56,7 +56,7 @@ namespace Assets.Scripts.Core.Utils.Debug {
             foreach (string s in _textQueue) {
                 _debugText.AppendLine(s);
             }
-            _text.text = _debugText.ToString();
+//            _text.text = _debugText.ToString();
             _debugText.Remove(0, _debugText.Length);
         }
 

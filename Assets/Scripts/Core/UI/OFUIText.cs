@@ -10,7 +10,7 @@ namespace Assets.Scripts.Core.UI {
     public class OFUIText : OFUIComponent {
         #region Fields
 
-        private Text _text;
+        private TextWithEvents _text;
 
         #endregion
 
@@ -44,7 +44,7 @@ namespace Assets.Scripts.Core.UI {
         }
 
         private void Init() {
-            _text = gameObject.AddComponent<Text>();
+            _text = gameObject.AddComponent<TextWithEvents>();
             _text.font = OFUIManager.Instance.TextFont;
         }
 

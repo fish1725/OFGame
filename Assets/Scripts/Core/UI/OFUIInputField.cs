@@ -77,21 +77,27 @@ namespace Assets.Scripts.Core.UI {
         public void OnBeginDrag(PointerEventData eventData) {
             if (!interactable) {
                 IBeginDragHandler dragHandler = gameObject.transform.parent.GetComponentInParent<IBeginDragHandler>();
-                dragHandler.OnBeginDrag(eventData);
+				if (dragHandler != null) {
+                	dragHandler.OnBeginDrag(eventData);
+				}
             }
         }
 
         public void OnDrag(PointerEventData eventData) {
             if (!interactable) {
                 IDragHandler dragHandler = gameObject.transform.parent.GetComponentInParent<IDragHandler>();
-                dragHandler.OnDrag(eventData);
+				if(dragHandler != null) {
+					dragHandler.OnDrag(eventData);
+				}
             }
         }
 
         public void OnEndDrag(PointerEventData eventData) {
             if (!interactable) {
                 IEndDragHandler dragHandler = gameObject.transform.parent.GetComponentInParent<IEndDragHandler>();
-                dragHandler.OnEndDrag(eventData);
+				if (dragHandler != null) {
+                	dragHandler.OnEndDrag(eventData);
+				}
             }
         }
 

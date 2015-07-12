@@ -42,7 +42,7 @@ namespace Assets.Scripts.Core.Game {
             return go.AddComponent<OFGameObject>();
         }
 
-        public void CreateLights() {
+        public void CreateLight() {
             GameObject go = new GameObject("Light");
             go.transform.SetParent(transform);
             go.AddComponent<Light>();
@@ -66,6 +66,7 @@ namespace Assets.Scripts.Core.Game {
             OFAction action = new OFAction();
             action.expression = Expression.Call(Expression.Constant(this), typeof (OFScene).GetMethod("OnSkill"));
             timelineTrigger.actions.Add(action);
+			timelineTrigger.actions.Add(action);
             timelineTrigger.Compile();
             vo.triggers.Add(timelineTrigger);
             _skillVOs.Add(vo);
@@ -99,7 +100,7 @@ namespace Assets.Scripts.Core.Game {
         public void Start() {
             CreateCamera();
             CreateTerrian();
-            CreateLights();
+            CreateLight();
         }
 
         #endregion

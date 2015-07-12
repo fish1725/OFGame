@@ -84,12 +84,13 @@ namespace Assets.Scripts.Core.UI.List {
         }
 
         public OFUIListItemCell AddCell(string propertyName, Func<object, string, object> getValue,
-            Action<object, string, object> setValue, Func<object, string, bool> canWrite) {
+		                                Action<object, string, object> setValue, Func<object, string, bool> canWrite, Func<object, string, Type> type) {
             GameObject go = OFUIManager.CreateUIObject(propertyName, gameObject);
             OFUIListItemCell cell = go.AddComponent<OFUIListItemCell>();
             cell.getValue = getValue;
             cell.setValue = setValue;
             cell.canWrite = canWrite;
+			cell.getType = type;
             cell.model = model;
             cell.propertyName = propertyName;
             cells.Add(cell);
@@ -110,7 +111,7 @@ namespace Assets.Scripts.Core.UI.List {
                             return propertyInfo.Name;
                         }
                         return s;
-                    }, null, null);
+                    });
                     list.AddProperty("value", (o, s) => {
                         PropertyInfo propertyInfo = o as PropertyInfo;
                         if (propertyInfo != null) {
@@ -128,13 +129,23 @@ namespace Assets.Scripts.Core.UI.List {
                             return propertyInfo.GetSetMethod() != null;
                         }
                         return false;
-                    });
+					}, (o, s) => {
+						PropertyInfo propertyInfo = o as PropertyInfo;
+						if (propertyInfo != null) {
+							object[] attrs = propertyInfo.GetCustomAttributes(typeof(OFUIListItemCellAttribute), true);
+							if (attrs.Length > 0) {
+								return (attrs[0] as OFUIListItemCellAttribute).type;
+							}
+						}
+						return null;
+					});
                     list.rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
                     list.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
                     list.rectTransform.offsetMin = Vector2.zero;
                     list.rectTransform.offsetMax = Vector2.zero;
+					list.bannerWidth = 0;
                     list.width = 300;
-                    list.height = 500;
+                    list.height = 400;
                 }
             }
         }

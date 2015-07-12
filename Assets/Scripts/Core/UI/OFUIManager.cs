@@ -6,6 +6,8 @@ using Assets.Scripts.Core.UI.List;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Assets.Scripts.Core.UI.Radio;
+using Assets.Scripts.Core.UI.Window;
 
 #endregion
 
@@ -78,6 +80,25 @@ namespace Assets.Scripts.Core.UI {
             OFUIList list = go.AddComponent<OFUIList>();
             return list;
         }
+
+		public OFUIRadio CreateRadio(string name) {
+			GameObject go = CreateUIObject (name, _root);
+			OFUIRadio radio = go.AddComponent<OFUIRadio> ();
+			return radio;
+		}
+
+		public OFUIWindow CreateWindow(string title) {
+			GameObject go = CreateUIObject(title, _root);
+			OFUIWindow window = go.AddComponent<OFUIWindow>();
+			window.title = title;
+			return window;
+		}
+
+		public OFUIScrollRect CreateScrollRect() {
+			GameObject go = CreateUIObject ("ScrollRect", _root);
+			OFUIScrollRect scrollRect = go.AddComponent<OFUIScrollRect> ();
+			return scrollRect;
+		}
 
         public OFUIScrollBar CreateScrollBar(string name) {
             GameObject go = CreateUIObject(name, _root);

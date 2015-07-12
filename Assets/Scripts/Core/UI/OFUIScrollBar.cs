@@ -42,7 +42,7 @@ namespace Assets.Scripts.Core.UI {
             Image handleImage = handle.AddComponent<Image>();
             handleImage.sprite = OFAssetManager.Instance.Get("ScrollBar_Thumb_Normal").Object as Sprite;
             handleImage.type = Image.Type.Sliced;
-            handleImage.color = OFUIManager.defaultSelectableColor;
+			handleImage.color = new Color (1f, 1f, 1f, 0.75f);
 
             RectTransform sliderAreaRect = sliderArea.GetComponent<RectTransform>();
             sliderAreaRect.sizeDelta = new Vector2(-20, -20);
